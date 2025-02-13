@@ -2,9 +2,8 @@
 .nav-bar {
     display: flex;
     flex-direction: row;
-    position: fixed;
+    position: absolute;
     justify-content: center;
-    top: 1px
 }
 
 .logo {

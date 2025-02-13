@@ -1,7 +1,7 @@
 {
     "name": "Angular Development",
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:16",
-    "postCreateCommand": "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash && export NVM_DIR=\"$HOME/.nvm\" && [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" && nvm install 18.19 && npm install -g @angular/cli",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+    "postCreateCommand": "npm install -g @angular/cli",
     "customizations": {
         "vscode": {
             "extensions": [

@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+    height: 100%; /* Make sure body and html take up full viewport height */
+    margin: 0; /* Remove default body margins */
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure wrapper takes up full viewport height */
+}
+
+/* Other global styles... */

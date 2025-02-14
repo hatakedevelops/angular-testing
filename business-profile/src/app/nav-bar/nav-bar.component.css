@@ -1,30 +1,73 @@
-
 .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
-    position: absolute;
-    justify-content: center;
+    justify-content: space-between; /* Distribute space between logo and links */
+    align-items: center;
+    background-color: white;
+    padding: 1rem;
+    z-index: 100;
 }
 
 .logo {
     display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: 60px;
-    justify-content: flex-start;
-    padding-top: 3%;
-    padding-left: 50px;
-    padding-right: 36vmax;
+    align-items: center;
+    height: auto;
+    width: auto;
+    padding: 0.5rem;
+}
+
+.logo img {
+    max-height: 50px;
+    max-width: 100px;
+    border-radius: 1rem;
+}
+
+.nav-bar-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem; /* Adjust gap as needed */
+    margin-right: 60rem; /* Add margin to the right for spacing */
+}
+
+.nav-bar-links {
+    display: flex;
+    flex-direction: row; /* Arrange links horizontally */
+    gap: 2rem; /* Spacing between links */
 }
 
 .nav-bar-link {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: larger;
+    font-size: 1.5rem;
     color: rgba(240, 100, 37, 1);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 40px;
-    padding-left: 36px;
-    padding-right: 36px;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, transform 0.3s ease; /* Include transform for smooth underline */
+    position: relative; /* For positioning the pseudo-element */
+}
+
+.nav-bar-link::before { /* Create the underline element */
+    content: "";
+    position: absolute;
+    bottom: -2px; /* Adjust as needed for underline position */
+    left: 0;
+    right: 0;
+    height: 2px; /* Adjust underline thickness */
+    background-color: transparent; /* Initially transparent */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    transform: scaleX(0); /* Initially scaled to zero width */
+}
+
+.nav-bar-link:hover {
+    color: rgba(240, 100, 37, 0.7);
+    transform: translateY(-2px); /* Slightly move up on hover */
+}
+
+.nav-bar-link:hover::before,
+.nav-bar-link.active::before { /* Underline for active link as well */
+    background-color: rgba(240, 100, 37, 1); /* Or your desired color */
+    transform: scaleX(1); /* Scale to full width */
 }

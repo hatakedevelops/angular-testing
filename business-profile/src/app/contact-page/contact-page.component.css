@@ -1,33 +1,9 @@
-.main-content {
-    flex: 1; /* Allow main content to expand and fill available space */
-    padding: 2rem; /* Add some padding around content */
-    background-color: #f8f8f8; /* Example background color */
-    display: flex; /* Enable flexbox for vertical centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 64px;
+    background-color: white;
+    height: 100%;
+    padding: 40vh;
 }
 
-.content-container {
-    max-width: 900px; /* Set a maximum width for the content */
-    width: 90%; /* Take up to 90% of the parent container */
-    margin: 0 auto; /* Center the content container */
-    margin-top: 60px;
-    text-align: center; /* Center text within the container */
-}
-
-.main-content h1, .main-content h2 {
-    text-align: center; /* Center headings */
-}
-
-.main-content ul {
-    list-style-type: disc; /* Use bullet points for lists */
-    padding-left: 20px;
-    text-align: left; /* Align list text to the left */
-}
-
-.main-content img {
-    max-width: 100%; /* Make images responsive */
-    height: auto;
-    display: block; /* Make images block elements */
-    margin: 20px auto; /* Center images */
-}

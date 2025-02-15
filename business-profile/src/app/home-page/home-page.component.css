@@ -5,6 +5,8 @@
     display: flex; /* Enable flexbox for vertical centering */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    height: 100%;
+    padding: 40vh;
 }
 
 .content-container {

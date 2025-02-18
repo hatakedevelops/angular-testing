@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body, html {
+    font-family: 'Roboto', sans-serif; /* Use Roboto as the primary font */
     height: 100%; /* Make sure body and html take up full viewport height */
     margin: 0; /* Remove default body margins */
 }
@@ -8,6 +11,5 @@ body, html {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure wrapper takes up full viewport height */
+    font-family: 'Roboto', sans-serif; /* Use Roboto as the primary font */
 }
-
-/* Other global styles... */

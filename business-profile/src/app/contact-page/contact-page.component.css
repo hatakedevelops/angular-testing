@@ -60,7 +60,7 @@ textarea {
 }
 
 textarea {
-    height: 310px; /* Increased height */
+    height: 280px; /* Increased height */
     resize: none; /* Allow vertical resizing */
 }
 
@@ -74,8 +74,12 @@ button {
     font-size: 16px;
     font-family: sans-serif;
     transition: background-color 0.3s ease;
-    width: auto; /* Adjust width as needed */
-    margin: 0 auto; /* Center the button */
+    position: absolute; /* Position the button absolutely within the box */
+    bottom: 300px; /* Adjust the distance from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    width: auto; /* Or set a specific width if needed */
+    margin: 0 auto; /* Remove any previous margins that might interfere */
     display: block; /* Make the button a block element */
 }
 

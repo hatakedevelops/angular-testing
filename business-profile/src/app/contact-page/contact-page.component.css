@@ -1,9 +1,90 @@
 .container {
     display: flex;
     flex-direction: row;
-    margin-top: 64px;
     background-color: white;
-    height: 100%;
-    padding: 40vh;
+    min-height: 80vh; /* Ensure container takes full viewport height */
+    padding: 20px; /* Consistent padding */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
+.contact-form-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #333333;
+    width: 50%; /* Adjust width as needed */
+    max-width: 75vh; /* Adjust max width as needed */
+    height: 50vh; /* Let height be determined by content */
+    margin: 10px auto;
+    box-shadow: -42px -26px 0px #E8DCC3;
+    padding: 20px; /* Add padding inside the box */
+    color: white; /* Text color inside the box */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.name-inputs {
+    display: flex; /* Enable Flexbox */
+    gap: 10px; /* Adjust spacing between inputs */
+}
+
+.name-inputs .form-group { /* Target form-groups inside name-inputs */
+    flex: 1; /* Make each input take equal width */
+    margin-bottom: 0; /* Remove bottom margin on name inputs */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-family: sans-serif; /* Use a clean, standard font */
+    font-size: 14px;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px; /* Increased padding */
+    border: 1px solid #555; /* Darker gray border */
+    border-radius: 5px; /* Slightly more rounded corners */
+    box-sizing: border-box;
+    background-color: #444; /* Lighter gray background */
+    color: white;
+    font-size: 16px; /* Slightly larger font size */
+    font-family: sans-serif;
+}
+
+textarea {
+    height: 150px; /* Increased height */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+button {
+    background-color: #FF6600; /* Distinct orange color */
+    color: white;
+    padding: 12px 20px; /* Adjusted padding */
+    border: none;
+    border-radius: 5px; /* More rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    font-family: sans-serif;
+    transition: background-color 0.3s ease;
+    width: auto; /* Adjust width as needed */
+    margin: 0 auto; /* Center the button */
+    display: block; /* Make the button a block element */
+}
+
+button:hover {
+    background-color: #e65c00; /* Darker orange on hover */
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

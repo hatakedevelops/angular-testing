@@ -4,7 +4,9 @@ import { ServicesPageComponent } from './services-page/services-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 
 export const routes: Routes = [
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', component: HomePageComponent},
     {path: 'services', component: ServicesPageComponent},
-    {path: 'contact', component: ContactPageComponent}
+    {path: 'contact', component: ContactPageComponent},
+    {path: '**', redirectTo:'home'},
 ];

@@ -1,8 +1,7 @@
 #cs-footer-274 {
     width: 100%;
-    margin-top: auto; /* Push footer to bottom */
     background-color: #ffffff; /* Or your desired background color */
-    padding: 2rem;
+    padding-bottom: 25px;
 }
 
 .cs-container {

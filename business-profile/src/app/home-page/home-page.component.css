@@ -32,10 +32,3 @@
     font-size: 2.5rem; /* Adjust as needed */
     margin-top: -5px;
   }
-
-  .triangle {
-  width: 500px;
-  height: 300px;
-  background-color: magenta;
-  clip-path: polygon(50% 100%, 50% 0%, 100% 100%);
-}

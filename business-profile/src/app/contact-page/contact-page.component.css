@@ -1,28 +1,29 @@
 .container {
     display: flex;
-    flex-direction: row;
-    background-color: white;
-    min-height: 80vh; /* Ensure container takes full viewport height */
-    padding: 20px; /* Consistent padding */
-    justify-content: center; /* Center horizontally */
+    flex-direction: column;
+    min-height: 70vh; /* Ensure container takes full viewport height */
+    justify-content: space-evenly; /* Center horizontally */
     align-items: center; /* Center vertically */
+    padding-top: 10vh;
+    padding-bottom: 5vh;
 }
 
 .contact-form-box {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    object-fit: contain;
     background-color: #333333;
     width: 50%; /* Adjust width as needed */
     max-width: 75vh; /* Adjust max width as needed */
     height: 50vh; /* Let height be determined by content */
-    margin: 10px auto;
     box-shadow: -42px -26px 0px #E8DCC3;
-    padding: 20px; /* Add padding inside the box */
+    padding: 4cap; /* Add padding inside the box */
     color: white; /* Text color inside the box */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .name-inputs {
@@ -32,17 +33,20 @@
 
 .name-inputs .form-group { /* Target form-groups inside name-inputs */
     flex: 1; /* Make each input take equal width */
-    margin-bottom: 10px; /* Remove bottom margin on name inputs */
+}
+
+form button {
+    position: sticky;
+    margin-left: 18vw;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
+    display: flex;
+    padding-bottom: 5px;
     color: white;
     font-family: sans-serif; /* Use a clean, standard font */
     font-size: 14px;
 }
-
 
 input[type="text"],
 input[type="email"],
@@ -60,27 +64,21 @@ textarea {
 }
 
 textarea {
-    height: 280px; /* Increased height */
+    position: relative;
+    height: 20vh; /* Increased height */
     resize: none; /* Allow vertical resizing */
 }
 
 button {
     background-color: #F06425; /* Distinct orange color */
     color: white;
-    padding: 12px 20px; /* Adjusted padding */
+    padding: 15px 40px; /* Adjusted padding */
     border: none;
     border-radius: 5px; /* More rounded corners */
     cursor: pointer;
     font-size: 16px;
     font-family: sans-serif;
     transition: background-color 0.3s ease;
-    position: absolute; /* Position the button absolutely within the box */
-    bottom: 300px; /* Adjust the distance from the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Center horizontally */
-    width: auto; /* Or set a specific width if needed */
-    margin: 0 auto; /* Remove any previous margins that might interfere */
-    display: block; /* Make the button a block element */
 }
 
 button:hover {

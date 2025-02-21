@@ -1,9 +1,23 @@
 .container {
     display: flex;
     flex-direction: row;
-    margin-top: 64px;
-    background-color: white;
-    height: 100%;
-    padding: 40vh;
+    align-items: flex-end;
+    position: relative;
 }
 
+.triangle {
+    min-width: 50%;
+    width: 75%;
+    height: 52.5vh;
+    position: absolute;
+    background-color: #333333;
+    clip-path: polygon(0% 100%, 100% 100%, 50% 0%, 0% 0%);
+}
+
+.container img {
+    height: 42vh;
+    width: 100%; 
+    object-fit: cover;
+    object-position: 500px; /* Use keyword for object-position */
+    clip-path: polygon(64.0% 100%, 100% 100%, 100% 0%, 38.9% 0%);
+}

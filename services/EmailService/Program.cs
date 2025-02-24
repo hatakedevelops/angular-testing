@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Mail;
 using Scalar.AspNetCore;
 using EmailService.services.Interfaces;
 using EmailService.services.Implementations;
@@ -7,7 +9,28 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
 
-// Add services to the container.
+// Add SmtpClient to the services collection
+builder.Services.AddSingleton<SmtpClient>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var smtpSection = configuration.GetSection("Smtp");
+    var smtpClient = new SmtpClient
+    {
+        Port = smtpSection.GetValue<int>("Port"),
+        Host = smtpSection.GetValue<string>("Host")!,
+        EnableSsl = true,
+        DeliveryMethod = SmtpDeliveryMethod.Network,
+        UseDefaultCredentials = false,
+        Credentials = new NetworkCredential(
+            smtpSection.GetValue<string>("Username"),
+            smtpSection.GetValue<string>("Password"))
+    };
+    return smtpClient;
+});
+
+// Add controller services
+builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -20,6 +43,9 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+// Map controllers
+app.MapControllers();
+
 // app.UseHttpsRedirection();
 
 var summaries = new[]
@@ -29,7 +55,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

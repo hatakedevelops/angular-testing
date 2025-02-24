@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using EmailService.Models;
 using EmailService.services.Interfaces;
 
@@ -10,35 +8,27 @@ namespace EmailService
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly ILogger<EmailController> _logger;
-        private readonly LogLevel _logLevel;
         public readonly IEmailService _service;
 
-        public EmailController(ILogger<EmailController> logger, LogLevel logLevel, IEmailService service)
+        public EmailController(IEmailService service)
         {
-            _logger = logger;
-            _logLevel = logLevel;
             _service = service;
         }
 
-        [HttpPost]
-        public ActionResult<ContactFormResponse> Post_SendContactForm([FromBody]ContactForm request) 
+        [HttpPost("send")]
+        public async Task<IActionResult> Post_SendContactForm([FromBody]ContactForm request) 
         {
-            if(request == null)
+            var response = await _service.Post_SendContactFormAsync(request);
+            if(request is null)
             {
                 return BadRequest();
             }
-            else 
+ 
+            if(response.Status == 201)
             {
-                _logger.Log(_logLevel, "Sending Client Request");
-                var response = _service.Post_SendContactForm(request);
-                if(response != null)
-                {
-                    _logger.Log(_logLevel, "Response Received.");
-                    return Ok(response);
-                }
+                return CreatedAtAction(nameof(Post_SendContactForm), response);
             }
-            return null;
+            return NotFound(response);
         }
     }
 }

@@ -28,3 +28,6 @@ scripts/Thumbs.db
 # Ignore Python cache
 scripts/__pycache__/
 scripts/*.py[cod]
+
+# Ignore Project Builds
+services/EmailService/bin/*

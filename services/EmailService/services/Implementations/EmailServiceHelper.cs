@@ -12,26 +12,15 @@ namespace EmailService.services.Implementations
 
         private readonly SmtpClient _client;
 
-        public EmailServiceHelper(SmtpClient client, IConfiguration configuration)
+        public EmailServiceHelper(SmtpClient client)
         {
-            var smtpSection = configuration.GetSection("Smtp");
-            _client = new SmtpClient
-            {
-                Port = smtpSection.GetValue<int>("Port"),
-                Host = smtpSection.GetValue<string>("Host")!,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(
-                    smtpSection.GetValue<string>("Username"),
-                    smtpSection.GetValue<string>("Password"))
-            };
+            _client = client;
         }
-        public async Task<ContactFormResponse> Post_SendContactForm(ContactForm request)
+        public async Task<ContactFormResponse> Post_SendContactFormAsync(ContactForm request)
         {
             var mailMessage = new MailMessage
             {
-                From = new MailAddress("{0}", request.Email),
+                From = new MailAddress(request.Email),
                 Subject = request.Subject,
                 Body = $"New Message From {request.FirstName} {request.LastName}\r\nMessage:\r\n{request.Message}",
                 IsBodyHtml = true

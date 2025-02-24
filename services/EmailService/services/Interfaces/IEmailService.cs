@@ -8,6 +8,6 @@ namespace EmailService.services.Interfaces
 {
     public interface IEmailService
     {
-        public Task<ContactFormResponse> Post_SendContactForm(ContactForm request);
+        public Task<ContactFormResponse> Post_SendContactFormAsync(ContactForm request);
     }
 }

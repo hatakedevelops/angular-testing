@@ -1,4 +1,11 @@
+using Scalar.AspNetCore;
+using EmailService.services.Interfaces;
+using EmailService.services.Implementations;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -10,6 +17,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 // app.UseHttpsRedirection();

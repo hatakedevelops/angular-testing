@@ -1,33 +1,44 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using EmailService.Models;
+using EmailService.services.Interfaces;
 
 namespace EmailService
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class EmailController : Controller
+    public class EmailController : ControllerBase
     {
         private readonly ILogger<EmailController> _logger;
+        private readonly LogLevel _logLevel;
+        public readonly IEmailService _service;
 
-        public EmailController(ILogger<EmailController> logger)
+        public EmailController(ILogger<EmailController> logger, LogLevel logLevel, IEmailService service)
         {
             _logger = logger;
+            _logLevel = logLevel;
+            _service = service;
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public ActionResult<ContactFormResponse> Post_SendContactForm(ContactForm request) 
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
+            if(request == null)
+            {
+                return BadRequest();
+            }
+            else 
+            {
+                _logger.Log(_logLevel, "Sending Client Request");
+                var response = _service.Post_SendContactForm(request);
+                if(response != null)
+                {
+                    _logger.Log(_logLevel, "Response Received.");
+                    return Ok(response);
+                }
+            }
+            return null;
         }
     }
 }

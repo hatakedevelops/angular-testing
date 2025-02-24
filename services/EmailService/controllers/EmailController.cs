@@ -22,7 +22,7 @@ namespace EmailService
         }
 
         [HttpPost]
-        public ActionResult<ContactFormResponse> Post_SendContactForm(ContactForm request) 
+        public ActionResult<ContactFormResponse> Post_SendContactForm([FromBody]ContactForm request) 
         {
             if(request == null)
             {

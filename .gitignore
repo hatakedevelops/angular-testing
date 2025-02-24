@@ -1,8 +1,8 @@
 # Ignore all files in the scripts folder
 scripts/*
 
-# Allow specific script files
-!scripts/*.sh
+# Ignore script files
+scripts/*.sh
 
 # Ignore backup files
 scripts/*~

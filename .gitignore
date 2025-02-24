@@ -1,0 +1,30 @@
+# Ignore all files in the scripts folder
+scripts/*
+
+# Allow specific script files
+!scripts/*.sh
+
+# Ignore backup files
+scripts/*~
+scripts/*.bak
+scripts/*.backup
+
+# Ignore temporary files
+scripts/*.tmp
+scripts/*.temp
+scripts/*.log
+
+# Ignore compiled binaries
+scripts/*.exe
+scripts/*.out
+scripts/*.obj
+
+# Ignore macOS specific files
+scripts/.DS_Store
+
+# Ignore Windows specific files
+scripts/Thumbs.db
+
+# Ignore Python cache
+scripts/__pycache__/
+scripts/*.py[cod]

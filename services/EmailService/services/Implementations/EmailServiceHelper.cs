@@ -3,48 +3,52 @@ using System.Net.Mail;
 
 using EmailService.Models;
 using EmailService.services.Interfaces;
-using EmailService.services.Constants;
+using Microsoft.Extensions.Options;
 
 namespace EmailService.services.Implementations
 {
     public class EmailServiceHelper : IEmailService
     {
+        private readonly Smtp _smtp;
 
-        private readonly SmtpClient _client;
-
-        public EmailServiceHelper(SmtpClient client)
+        public EmailServiceHelper(IOptions<Smtp> smtp)
         {
-            _client = client;
+            _smtp = smtp.Value;
         }
         public async Task<ContactFormResponse> Post_SendContactFormAsync(ContactForm request)
         {
-            var mailMessage = new MailMessage
+            using (var client = new SmtpClient(_smtp.Host, _smtp.Port))
             {
-                From = new MailAddress(request.Email), // Changed to User Secrets
-                // add a To = request.Email
-                Subject = request.Subject,
-                Body = $"New Message From {request.FirstName} {request.LastName}\r\nMessage:\r\n{request.Message}",
-                IsBodyHtml = true
-            };
+                client.Credentials = new NetworkCredential(_smtp.Username, _smtp.Password);
+                client.EnableSsl = true;
 
-            mailMessage.To.Add(RecipientAddresses.TestEmail);
+                var mail = new MailMessage
+                {
+                    From = new MailAddress(_smtp.Username),
+                    Subject = request.Subject,
+                    Body = $"New Message From {request.FirstName} {request.LastName}\r\nMessage:\r\n{request.Message}",
+                    IsBodyHtml = true
+                };
 
-            try
-            {
-                await _client.SendMailAsync(mailMessage);
-                return new ContactFormResponse
+                mail.To.Add(request.Email);
+
+                try
                 {
-                    Status = 200,
-                    ResponseMessage = "Email has been successfuly delivered"
-                };
-            }
-            catch (Exception ex)
-            {
-                return new ContactFormResponse
+                    await client.SendMailAsync(mail);
+                    return new ContactFormResponse
+                    {
+                        Status = 201,
+                        ResponseMessage = "Email has been delivered."
+                    };
+                }
+                catch (Exception ex)
                 {
-                    Status = ex.HResult,
-                    ResponseMessage = $"Failed to send email: {ex.Message}"
-                };
+                    return new ContactFormResponse
+                    {
+                        Status = 500,
+                        ResponseMessage = $"Failed to send email.\r\nError Code: {ex.HResult} \r\nMessage:{ex.Message}"
+                    };
+                }
             }
         }
     }

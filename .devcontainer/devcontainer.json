@@ -1,7 +1,7 @@
 {
     "name": "Full Stack Development",
     "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
-    "postCreateCommand": "npm install -g @angular/cli && dotnet restore",
+    "postCreateCommand": "npm install -g @angular/cli && dotnet restore && dotnet user-secrets set “Smtp:Host“ “smtp.gmail.com” && dotnet user-secrets set “Smtp:Port“ “587” && dotnet user-secrets set “Smtp:Username“ “apitester87@gmail.com” && dotnet user-secrets set “Smtp:Password“ “ggqgeametjzcrqpx”",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -9,6 +9,7 @@
                 "esbenp.prettier-vscode",
                 "angular.ng-template",
                 "ms-dotnettools.csharp",
+                "ms-dotnettools.csdevkit",
                 "editorconfig.editorconfig"
             ]
         }

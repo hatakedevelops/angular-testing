@@ -1,32 +1,18 @@
-using System.Net;
-using System.Net.Mail;
 using Scalar.AspNetCore;
 using EmailService.services.Interfaces;
 using EmailService.services.Implementations;
+using EmailService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
 
-// Add SmtpClient to the services collection
-builder.Services.AddSingleton<SmtpClient>(sp => // MOVE THIS TO SERVICEHELPER
-{
-    var configuration = sp.GetRequiredService<IConfiguration>();
-    var smtpSection = configuration.GetSection("Smtp");
-    var smtpClient = new SmtpClient
-    {
-        Port = smtpSection.GetValue<int>("Port"),
-        Host = smtpSection.GetValue<string>("Host")!,
-        EnableSsl = true,
-        DeliveryMethod = SmtpDeliveryMethod.Network,
-        UseDefaultCredentials = false,
-        Credentials = new NetworkCredential(
-            smtpSection.GetValue<string>("Username"), // USE VALUE FOR FROM
-            smtpSection.GetValue<string>("Password"))
-    };
-    return smtpClient;
-});
+// Add user secrets
+builder.Configuration.AddUserSecrets<Program>();
+
+// Bind the Smtp
+builder.Services.Configure<Smtp>(options => builder.Configuration.GetSection("Smtp").Bind(options));
 
 // Add controller services
 builder.Services.AddControllers();
@@ -42,7 +28,6 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
-
 // Map controllers
 app.MapControllers();
 

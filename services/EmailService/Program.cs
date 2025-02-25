@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
 
 // Add SmtpClient to the services collection
-builder.Services.AddSingleton<SmtpClient>(sp =>
+builder.Services.AddSingleton<SmtpClient>(sp => // MOVE THIS TO SERVICEHELPER
 {
     var configuration = sp.GetRequiredService<IConfiguration>();
     var smtpSection = configuration.GetSection("Smtp");
@@ -22,7 +22,7 @@ builder.Services.AddSingleton<SmtpClient>(sp =>
         DeliveryMethod = SmtpDeliveryMethod.Network,
         UseDefaultCredentials = false,
         Credentials = new NetworkCredential(
-            smtpSection.GetValue<string>("Username"),
+            smtpSection.GetValue<string>("Username"), // USE VALUE FOR FROM
             smtpSection.GetValue<string>("Password"))
     };
     return smtpClient;

@@ -20,7 +20,8 @@ namespace EmailService.services.Implementations
         {
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(request.Email),
+                From = new MailAddress(request.Email), // Changed to User Secrets
+                // add a To = request.Email
                 Subject = request.Subject,
                 Body = $"New Message From {request.FirstName} {request.LastName}\r\nMessage:\r\n{request.Message}",
                 IsBodyHtml = true
@@ -34,7 +35,7 @@ namespace EmailService.services.Implementations
                 return new ContactFormResponse
                 {
                     Status = 200,
-                    ResponseMessage = "Email sent successfully!"
+                    ResponseMessage = "Email has been successfuly delivered"
                 };
             }
             catch (Exception ex)

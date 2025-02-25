@@ -30,10 +30,10 @@ scripts/__pycache__/
 scripts/*.py[cod]
 
 # Ignore Project Builds
-services/EmailService/bin
-services/EmailService/bin/*
-services/EmailService/obj
-services/EmailService/obj/*
+./services/EmailService/bin
+./services/EmailService/bin/*
+./services/EmailService/obj
+./services/EmailService/obj/*
 
 # Ignore IDE Files
 .vscode

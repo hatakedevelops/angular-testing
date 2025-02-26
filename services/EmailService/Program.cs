@@ -5,14 +5,11 @@ using EmailService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
-
-// Add user secrets
-builder.Configuration.AddUserSecrets<Program>();
-
 // Bind the Smtp
 builder.Services.Configure<Smtp>(options => builder.Configuration.GetSection("Smtp").Bind(options));
+
+// Add services to the container.
+builder.Services.AddTransient<IEmailService, EmailServiceHelper>();
 
 // Add controller services
 builder.Services.AddControllers();

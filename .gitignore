@@ -37,3 +37,4 @@ scripts/*.py[cod]
 
 # Ignore IDE Files
 .vscode
+services/EmailService/appsettings.Development.json
